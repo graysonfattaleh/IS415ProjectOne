@@ -51,7 +51,11 @@ namespace IS415ProjectOne
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapDefaultControllerRoute();
             });
+
+           
         }
     }
 }

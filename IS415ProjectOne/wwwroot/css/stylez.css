@@ -2,3 +2,11 @@
     width: 100px;
     border-radius:10px;
 }
+
+.ikon-small{
+    width:20px;
+}
+
+.grow:hover{
+    width:30px;
+}
