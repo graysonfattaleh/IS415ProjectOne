@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using IS415ProjectOne.Models;
+using IS415ProjectOne.Models.ViewModels;
 
 namespace IS415ProjectOne.Controllers
 {
@@ -13,9 +14,15 @@ namespace IS415ProjectOne.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public IGroupRepository _repository;
+
+        //Defaulting pagesize to 12 since there are 12 possible appointments in a day, which makes 12 days.
+        private int PageSize = 12;
+
+        public HomeController(ILogger<HomeController> logger, IGroupRepository repository)
         {
             _logger = logger;
+            _repository = repository;
         }
 
         public IActionResult Index()
@@ -34,9 +41,23 @@ namespace IS415ProjectOne.Controllers
         }
 
         //returns appointments page
-        public IActionResult Appointments()
+        public IActionResult Appointments(int pageNum = 1)
         {
-            return View();
+            AppointmentListViewModel viewModel = new AppointmentListViewModel
+            {
+                SchedulableAppointments = SeedData.GetDefaultListAppointmentTimes(),
+                PagingInfo = new AppointmentPagingInfo
+                {
+                    ItemsPerPage = PageSize,
+                    CurrentPage = pageNum,
+                    TotalNumItems = SeedData.GetDefaultListAppointmentTimes().Count()
+                },
+                Groups = _repository.Groups
+            };
+            Console.Out.WriteLine("here stuff");
+            return View(
+                viewModel
+                );
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
