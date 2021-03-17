@@ -20,5 +20,12 @@ namespace IS415ProjectOne.Models.ViewModels
         /// </summary>
         public List<Appointment> SchedulableAppointments { get; set; }
 
+        public List<DateTime> takenTimes = new List<DateTime>();
+
+        public void addTakenTime(DateTime time)
+        {
+            takenTimes.Add(time);
+        }
+
     }
 }

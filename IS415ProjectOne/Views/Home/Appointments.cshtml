@@ -4,6 +4,35 @@
 @{
 }
 
-
+@model IS415ProjectOne.Models.ViewModels.AppointmentListViewModel
 
 <!--List of Appointments by time-->
+<table class="table table-light table-bordered table-striped">
+    <thead >
+        <tr>
+            <th>Group Name</th>
+            <th>Size</th>
+            <th>Number</th>
+            <th>Start Time</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (Group group in Model.Groups)
+        {
+
+        <tr>
+            <td>@group.GroupName</td>
+            <td>@group.Size</td>
+            <td>@group.PhoneNumber</td>
+            <td>@Convert.ToDateTime(group.StartTime).ToString("MMM dd hh") @(group.StartTime.Hour >  12 ? "PM" : "AM") </td>
+            <td>@group.Email</td>
+        </tr>
+
+
+        }
+
+    </tbody>
+
+</table>

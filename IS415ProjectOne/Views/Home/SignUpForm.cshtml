@@ -1,0 +1,32 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model IS415ProjectOne.Models.Group
+
+<div class="center text-center" style="width:40vw; margin-left:auto; margin-right:auto;">
+    <form class="text-center" asp-action="MakeAppointment" method="post">
+        <div class="form-group">
+            <input id="GroupName" name="GroupName" type="text" placeholder="Group Name" /><br />
+        </div>
+        <div class="form-group">
+            <input id="GroupSize" name="GroupSize" type="text" placeholder="Group Size" /><br />
+        </div>
+        <div class="form-group">
+            <input id="Email" Name="Email" type="text" placeholder="Email" /><br />
+        </div>
+        <div class="form-group">
+            <input id="PhoneNumber" name="PhoneNumber" type="text" placeholder="PhoneNumber" />
+        </div>
+        <div class="form-group">
+            <input id="hiddenTime" name="hiddenTime" type="hidden" value=@Model.StartTime />
+        </div>
+        <div class="form-group">
+            <input id="hiddenTimeHour" name="hiddenTimeHour" type="hidden" value=@Model.StartTime.Hour />
+        </div>
+        <br><br />
+        <button class="btn btn-primary" type="submit">Make Appointment</button>
+    </form>
+</div>

@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IS415ProjectOne.Migrations
 {
     [DbContext(typeof(TempleAppointmentDbContext))]
-    [Migration("20210316235035_Initial")]
-    partial class Initial
+    [Migration("20210317142213_initialcreate")]
+    partial class initialcreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

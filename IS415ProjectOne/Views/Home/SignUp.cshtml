@@ -4,3 +4,49 @@
 @{
 }
 <!--Form to make an appointment-->
+@model IS415ProjectOne.Models.ViewModels.AppointmentListViewModel
+
+<table class="table table-light table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Availble Time</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Appointment apt in Model.SchedulableAppointments)
+        {
+            @if (Model.takenTimes.Contains(apt.StartTime))
+            {
+                <tr>
+                    <td>@Convert.ToDateTime(apt.StartTime).ToString("MMM dd hh") @(apt.StartTime.Hour >  12 ? "PM" : "AM")</td>
+                    <td> <p style="color:red;">Taken</p></td>
+                </tr>
+            }
+            else
+            {
+    <tr>
+        <form asp-action="SignUpForm" method="post">
+            <td>
+
+
+                <input id="hiddenInput" name="hiddenInput" type="hidden" value=@apt.StartTime />
+                <input id="hiddenHour" name="hiddenHour" type="hidden" value=@apt.StartTime.Hour />
+
+                @Convert.ToDateTime(apt.StartTime).ToString("MMM dd hh") @(apt.StartTime.Hour >  12 ? "PM" : "AM")
+
+                <br />
+                
+
+            </td>
+            <td>
+                <button class="btn btn-primary" type="submit">Make Appointment</button>
+            </td>
+        </form>
+    </tr>
+
+            }
+        }
+
+    </tbody>
+</table>

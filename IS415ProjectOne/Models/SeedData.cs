@@ -15,6 +15,8 @@ namespace IS415ProjectOne.Models
             TempleAppointmentDbContext context = application.ApplicationServices.
                 CreateScope().ServiceProvider.GetRequiredService<TempleAppointmentDbContext>();
 
+            
+
             if (context.Database.GetPendingMigrations().Any())
             {
                 context.Database.Migrate();
@@ -71,7 +73,7 @@ namespace IS415ProjectOne.Models
                         PhoneNumber = "123-123-1235",
                         //assigns year, month, day, hour, min, seconds
                         //DateTime dt3 = new DateTime(2015, 12, 31, 5, 10, 20);
-                        StartTime = new DateTime(2021, 3, 22, 17, 0, 0)
+                        StartTime = new DateTime(2021, 3, 22, 11, 0, 0)
                     },
                     new Group
                     {
@@ -81,7 +83,7 @@ namespace IS415ProjectOne.Models
                         PhoneNumber = "123-123-1235",
                         //assigns year, month, day, hour, min, seconds
                         //DateTime dt3 = new DateTime(2015, 12, 31, 5, 10, 20);
-                        StartTime = new DateTime(2021, 3, 22, 17, 0, 0)
+                        StartTime = new DateTime(2021, 3, 22, 10, 0, 0)
                     },
                     new Group
                     {
@@ -123,6 +125,7 @@ namespace IS415ProjectOne.Models
                         0
                         );
 
+                    
                     defaultAppts.Add(new Appointment
                     {
                         StartTime = StartTime,
