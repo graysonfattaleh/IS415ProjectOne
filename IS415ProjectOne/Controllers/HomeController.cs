@@ -20,7 +20,7 @@ namespace IS415ProjectOne.Controllers
         //Defaulting pagesize to 12 since there are 12 possible appointments in a day, which makes 12 days.
         private int PageSize = 12;
 
-        public HomeController(ILogger<HomeController> logger, IGroupRepository repository,TempleAppointmentDbContext context)
+        public HomeController(ILogger<HomeController> logger, IGroupRepository repository, TempleAppointmentDbContext context)
         {
             _logger = logger;
             _repository = repository;
@@ -39,13 +39,13 @@ namespace IS415ProjectOne.Controllers
             {
                 StartTime = new DateTime(hiddenInput.Year, hiddenInput.Month, hiddenInput.Day, hiddenHour, 0, 0)
             };
-         
+
             return View(group);
         }
 
         // gets called when creating group
 
-        public IActionResult MakeAppointment(int GroupSize, int hiddenTimeHour,DateTime hiddenTime, string GroupName, string Email, string PhoneNumber, int pageNum=1)
+        public IActionResult MakeAppointment(int GroupSize, int hiddenTimeHour, DateTime hiddenTime, string GroupName, string Email, string PhoneNumber, int pageNum = 1)
         {
             // make object
             Group new_group = new Group
@@ -54,7 +54,7 @@ namespace IS415ProjectOne.Controllers
                 GroupName = GroupName,
                 Size = GroupSize,
                 PhoneNumber = PhoneNumber,
-                StartTime = new DateTime(hiddenTime.Year,hiddenTime.Month,hiddenTime.Day,hiddenTimeHour,0,0)
+                StartTime = new DateTime(hiddenTime.Year, hiddenTime.Month, hiddenTime.Day, hiddenTimeHour, 0, 0)
             };
 
             // add group to context and save
@@ -70,22 +70,23 @@ namespace IS415ProjectOne.Controllers
             }
             // make new view model for the appointments
             AppointmentListViewModel viewModel = new AppointmentListViewModel
+            {
+                SchedulableAppointments = SeedData.GetDefaultListAppointmentTimes(),
+                PagingInfo = new AppointmentPagingInfo
                 {
-                    SchedulableAppointments = SeedData.GetDefaultListAppointmentTimes(),
-                    PagingInfo = new AppointmentPagingInfo
-                    {
-                        ItemsPerPage = PageSize,
-                        CurrentPage = pageNum,
-                        TotalNumItems = SeedData.GetDefaultListAppointmentTimes().Count()
-                    },
-                    Groups = _repository.Groups
-                };
+                    ItemsPerPage = PageSize,
+                    CurrentPage = pageNum,
+                    TotalNumItems = SeedData.GetDefaultListAppointmentTimes().Count()
+                },
+                Groups = _repository.Groups
+            };
 
-                viewModel.addTakenTime(new_group.StartTime);
-                return View("Appointments", viewModel);
+            viewModel.addTakenTime(new_group.StartTime);
+            //return View("Appointments", viewModel);
+            return View("Index");
 
-            
-            
+
+
 
         }
 
@@ -94,7 +95,7 @@ namespace IS415ProjectOne.Controllers
         public IActionResult SignUp(int pageNum = 1)
         {
 
-            
+
 
             AppointmentListViewModel viewModel = new AppointmentListViewModel
             {
@@ -110,7 +111,7 @@ namespace IS415ProjectOne.Controllers
 
             List<DateTime> apptListTaken = new List<DateTime>();
 
-            foreach(Group taken in viewModel.Groups)
+            foreach (Group taken in viewModel.Groups)
             {
                 apptListTaken.Add(taken.StartTime);
             }
