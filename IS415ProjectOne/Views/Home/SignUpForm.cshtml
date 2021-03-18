@@ -8,6 +8,11 @@
 
 <div class="center text-center" style="width:40vw; margin-left:auto; margin-right:auto;">
     <form class="text-center" asp-action="MakeAppointment" method="post">
+        <div>
+            <h4>You've Selected An Appointment For:</h4>
+            <b>@Model.StartTime</b>
+        </div>
+        <br /><br />
         <div class="form-group">
             <input id="GroupName" name="GroupName" type="text" placeholder="Group Name" /><br />
         </div>

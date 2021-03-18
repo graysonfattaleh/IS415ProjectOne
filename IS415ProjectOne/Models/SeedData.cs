@@ -107,14 +107,14 @@ namespace IS415ProjectOne.Models
             List<Appointment> defaultAppts = new List<Appointment>();
             int daysAppointmentsAvailable = 7;
             int hourStart = 8;
-            int hourEnd = 20;
+            //int hourEnd = 20;
             int dayStart = 18;
-            int dayEnd = 24;
+            //int dayEnd = 24;
             int year = 2021;
             int month = 3;
             for (int i = 0; i < daysAppointmentsAvailable; i++)
             {
-                for (int z = 0; z < 12 ; z++)
+                for (int z = 0; z < 13 ; z++)
                 {
                     DateTime StartTime = new DateTime(
                         year, 
